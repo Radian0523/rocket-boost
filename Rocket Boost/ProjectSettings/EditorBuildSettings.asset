@@ -10,10 +10,19 @@ EditorBuildSettings:
     guid: ae3169a0267fc374a8d89c462e27bad8
   - enabled: 1
     path: Assets/Scenes/Under.unity
-    guid: 274c3b0fc6f34d94c827f03588913fd1
+    guid: f5703db9d2c02fe48b425dd5125513e5
   - enabled: 1
     path: Assets/Scenes/Through.unity
-    guid: ec3a9ff509ff7bc4f98890e06132e5db
+    guid: 6b318e8d10328c6489ce17b3509b7efd
+  - enabled: 1
+    path: Assets/Scenes/Oscillator.unity
+    guid: b026235f38e57994684ea08e2904546a
+  - enabled: 1
+    path: Assets/Scenes/MovingPad.unity
+    guid: 81108c3d1656cbc4ea6ed427c4b73cb6
+  - enabled: 1
+    path: Assets/Scenes/LargePod.unity
+    guid: 86c949593a6774948bac94edbb8f5662
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
