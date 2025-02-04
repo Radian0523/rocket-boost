@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
@@ -7,18 +8,37 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource audioSource;
     [SerializeField] private float timeToLoadScene = 2f;//SceneLoadDelayの方がよかったかも。DelayとTimeは意識的に変数名で分けるべきだな
-    [SerializeField] private AudioClip deathExplosion;
-    [SerializeField] private AudioClip success;
+    [SerializeField] private AudioClip deathExplosionSFX;
+    [SerializeField] private AudioClip successSFX;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
 
     bool isControllable = true;
+    bool isCollidable = true;
     private void Start()
     {
 
         audioSource = GetComponent<AudioSource>();
     }
+    private void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Keyboard.current.lKey.wasPressedThisFrame)
+        {
+            LoadNextLevel();
+        }
+        else if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            isCollidable = !isCollidable;
+        }
+    }
     private void OnCollisionEnter(Collision other)
     {
-        if (!isControllable) { return; }
+        if (!isControllable || !isCollidable) { return; }
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -39,7 +59,8 @@ public class CollisionHandler : MonoBehaviour
     {
         audioSource.Stop();
         GetComponent<Movement>().SetMovementEnabled(false);
-        audioSource.PlayOneShot(success);
+        audioSource.PlayOneShot(successSFX);
+        successParticles.Play();
         isControllable = false;
         Invoke("LoadNextLevel", timeToLoadScene);
 
@@ -49,9 +70,9 @@ public class CollisionHandler : MonoBehaviour
     {
         audioSource.Stop();
         GetComponent<Movement>().SetMovementEnabled(false);
-        audioSource.PlayOneShot(deathExplosion);
+        audioSource.PlayOneShot(deathExplosionSFX);
+        crashParticles.Play();
         isControllable = false;
-
         //第一引数の関数を、第二引数秒分待ってから、呼び出す
         Invoke("ReloadLevel", timeToLoadScene);
     }

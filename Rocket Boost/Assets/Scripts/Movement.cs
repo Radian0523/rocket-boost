@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float thrustSpeed = 1000f;
     [SerializeField] private float rotationSpeed = 1000f;
     [SerializeField] private AudioClip mainEngine;
+    [SerializeField] private ParticleSystem mainBooster;
+    [SerializeField] private ParticleSystem rightBooster;
+    [SerializeField] private ParticleSystem leftBooster;
 
 
     Rigidbody rb;
@@ -52,28 +56,64 @@ public class Movement : MonoBehaviour
 
     }
 
+
+
     private void ProcessThrust()
     {
         if (thrust.IsPressed())
         {
-            //これを入れることで、何度もAudioが再生されて汚い音になることを防ぐ。フラグでもできるが、これのほうが複雑化しにくい。
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-            rb.AddRelativeForce(Vector3.up * thrustSpeed * Time.fixedDeltaTime);
+            StartThrusting();
         }
         else if (thrust.enabled && rotation.enabled)
         {
-            audioSource.Stop();
+            StopThrusting();
         }
 
     }
+    private void StartThrusting()
+    {
+        //これを入れることで、何度もAudioが再生されて汚い音になることを防ぐ。フラグでもできるが、これのほうが複雑化しにくい。
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        if (!mainBooster.isPlaying)
+        {
+            mainBooster.Play();
+        }
+        rb.AddRelativeForce(Vector3.up * thrustSpeed * Time.fixedDeltaTime);
+    }
+    private void StopThrusting()
+    {
+        audioSource.Stop();
+        mainBooster.Stop();
+    }
+
+
+
     private void ProcessRotation()
     {
         //何もしてなければ０、positiveで１、negativeで-１を返す
         float rotationInput = rotation.ReadValue<float>();
-
+        if (rotationInput == 1)
+        {
+            if (!leftBooster.isPlaying)
+            {
+                leftBooster.Play();
+            }
+        }
+        else if (rotationInput == -1)
+        {
+            if (!rightBooster.isPlaying)
+            {
+                rightBooster.Play();
+            }
+        }
+        else
+        {
+            rightBooster.Stop();
+            leftBooster.Stop();
+        }
         //手動で回転させているときは、物理システムによる回転を無視させる(変な挙動がなくなり、操作がしやすくなる)
         rb.freezeRotation = (rotationInput != 0) ? true : false;
         transform.Rotate(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed);
