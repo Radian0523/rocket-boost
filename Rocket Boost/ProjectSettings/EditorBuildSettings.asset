@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Button Pad 6.unity
     guid: e1901aabfd5918d448e55d2908b5637b
+  - enabled: 1
+    path: Assets/Scenes/One Droon.unity
+    guid: 500e8704d9b4aab468ac1cd809c941a1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
