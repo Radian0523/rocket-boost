@@ -24,11 +24,23 @@ EditorBuildSettings:
     path: Assets/Scenes/LargePod.unity
     guid: 86c949593a6774948bac94edbb8f5662
   - enabled: 1
-    path: Assets/Scenes/Button Pad 4.unity
-    guid: 6d1922783010e2b4993f51281fd94bf8
+    path: Assets/Scenes/Button Pad 1.unity
+    guid: 7dd85bf4181ee984d81a2be53cb28820
   - enabled: 1
     path: Assets/Scenes/Button Pad 2.unity
     guid: 68863d0d5e1cdd747bd97d64fcc3c2a7
+  - enabled: 1
+    path: Assets/Scenes/Button Pad 3.unity
+    guid: 3c8c4199ce8193a4aaf1d90c27f0d57b
+  - enabled: 1
+    path: Assets/Scenes/Button Pad 4.unity
+    guid: 6d1922783010e2b4993f51281fd94bf8
+  - enabled: 1
+    path: Assets/Scenes/Button Pad 5.unity
+    guid: 444790e37ab5e8f48828d4d6adf5b2c3
+  - enabled: 1
+    path: Assets/Scenes/Button Pad 6.unity
+    guid: e1901aabfd5918d448e55d2908b5637b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
