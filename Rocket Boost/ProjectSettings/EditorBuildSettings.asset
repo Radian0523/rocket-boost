@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LargePod.unity
     guid: 86c949593a6774948bac94edbb8f5662
   - enabled: 1
-    path: Assets/Scenes/Button Pad.unity
+    path: Assets/Scenes/Button Pad 1.unity
     guid: 6d1922783010e2b4993f51281fd94bf8
   - enabled: 1
     path: Assets/Scenes/Button Pad 2.unity
