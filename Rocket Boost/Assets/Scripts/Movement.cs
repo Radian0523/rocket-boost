@@ -10,12 +10,12 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] InputAction thrust;
     [SerializeField] InputAction rotation;
-    [SerializeField] private float thrustSpeed = 1000f;
-    [SerializeField] private float rotationSpeed = 1000f;
-    [SerializeField] private AudioClip mainEngine;
-    [SerializeField] private ParticleSystem mainBooster;
-    [SerializeField] private ParticleSystem rightBooster;
-    [SerializeField] private ParticleSystem leftBooster;
+    [SerializeField] float thrustSpeed = 1000f;
+    [SerializeField] float rotationSpeed = 1000f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] ParticleSystem mainBooster;
+    [SerializeField] ParticleSystem rightBooster;
+    [SerializeField] ParticleSystem leftBooster;
 
 
     Rigidbody rb;
@@ -114,7 +114,8 @@ public class Movement : MonoBehaviour
             leftBooster.Stop();
         }
         //手動で回転させているときは、物理システムによる回転を無視させる(変な挙動がなくなり、操作がしやすくなる)
-        rb.freezeRotation = (rotationInput != 0) ? true : false;
+        // rb.freezeRotation = (rotationInput != 0) ? true : false;
+        // rb.freezeRotation = true;
         transform.Rotate(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed);
 
         //rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed));

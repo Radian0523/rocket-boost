@@ -6,44 +6,56 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Over.unity
+    path: Assets/Scenes/Easy Simple/Over.unity
     guid: ae3169a0267fc374a8d89c462e27bad8
   - enabled: 1
-    path: Assets/Scenes/Under.unity
+    path: Assets/Scenes/Easy Simple/Under.unity
     guid: f5703db9d2c02fe48b425dd5125513e5
   - enabled: 1
-    path: Assets/Scenes/Through.unity
+    path: Assets/Scenes/Easy Simple/Through.unity
     guid: 6b318e8d10328c6489ce17b3509b7efd
   - enabled: 1
-    path: Assets/Scenes/Oscillator.unity
+    path: Assets/Scenes/Easy Simple/Oscillator.unity
     guid: b026235f38e57994684ea08e2904546a
   - enabled: 1
-    path: Assets/Scenes/MovingPad.unity
+    path: Assets/Scenes/Easy Simple/MovingPad.unity
     guid: 81108c3d1656cbc4ea6ed427c4b73cb6
   - enabled: 1
-    path: Assets/Scenes/LargePod.unity
+    path: Assets/Scenes/Easy Simple/LargePod.unity
     guid: 86c949593a6774948bac94edbb8f5662
   - enabled: 1
-    path: Assets/Scenes/Button Pad 1.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 1.unity
     guid: 7dd85bf4181ee984d81a2be53cb28820
   - enabled: 1
-    path: Assets/Scenes/Button Pad 2.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 2.unity
     guid: 68863d0d5e1cdd747bd97d64fcc3c2a7
   - enabled: 1
-    path: Assets/Scenes/Button Pad 3.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 3.unity
     guid: 3c8c4199ce8193a4aaf1d90c27f0d57b
   - enabled: 1
-    path: Assets/Scenes/Button Pad 4.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 4.unity
     guid: 6d1922783010e2b4993f51281fd94bf8
   - enabled: 1
-    path: Assets/Scenes/Button Pad 5.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 5.unity
     guid: 444790e37ab5e8f48828d4d6adf5b2c3
   - enabled: 1
-    path: Assets/Scenes/Button Pad 6.unity
+    path: Assets/Scenes/Button Pad Scenes/Button Pad 6.unity
     guid: e1901aabfd5918d448e55d2908b5637b
   - enabled: 1
-    path: Assets/Scenes/One Droon 1.unity
+    path: Assets/Scenes/Droon Scenes/One Droon 1.unity
     guid: 500e8704d9b4aab468ac1cd809c941a1
+  - enabled: 1
+    path: Assets/Scenes/Droon Scenes/One Droon 2.unity
+    guid: 03e3781612831f4409e41f02ce09569f
+  - enabled: 1
+    path: Assets/Scenes/Droon Scenes/Two Droons 1.unity
+    guid: d6dfe5294439c3449bd8148591697a8b
+  - enabled: 1
+    path: Assets/Scenes/Droon Scenes/Four Droons 1.unity
+    guid: a547360a68d293846b192a1948bfcdcc
+  - enabled: 1
+    path: Assets/Scenes/Droon Scenes/Six Droons 1.unity
+    guid: 04c1617868570834e9c7eee066672cc9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
