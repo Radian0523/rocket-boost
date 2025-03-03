@@ -17,11 +17,14 @@ public class Planet : MonoBehaviour
     [SerializeField] float planetPushPower = 3f;
     [SerializeField] GameObject player;
     [SerializeField] GameObject planetModel;
+    [SerializeField] AudioClip playerSizeBig;
+    AudioSource audioSource;
     PlayerSizeState currentState;
     float timer;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         rb.AddForce(Vector3.right * planetPushPower);
 
         player = GameObject.FindWithTag("Player");
@@ -44,7 +47,8 @@ public class Planet : MonoBehaviour
                 }
                 break;
             case PlayerSizeState.big_1:
-                player.transform.localScale = (player.transform.localScale.x + 0.2f) * Vector3.one;
+                player.transform.localScale = (player.transform.localScale.x - 0.1f) * Vector3.one;
+                audioSource.PlayOneShot(playerSizeBig);
                 currentState++;
                 Debug.Log("big1");
                 break;
@@ -57,7 +61,8 @@ public class Planet : MonoBehaviour
                 }
                 break;
             case PlayerSizeState.big_2:
-                player.transform.localScale = (player.transform.localScale.x + 0.2f) * Vector3.one;
+                player.transform.localScale = (player.transform.localScale.x - 0.1f) * Vector3.one;
+                audioSource.PlayOneShot(playerSizeBig);
                 currentState++;
                 Debug.Log("big2");
                 break;
@@ -70,7 +75,8 @@ public class Planet : MonoBehaviour
                 }
                 break;
             case PlayerSizeState.big_3:
-                player.transform.localScale = (player.transform.localScale.x + 0.2f) * Vector3.one;//なぜかシーンから抜けたり、シーンを再ロードしたりすると、これが適用される。しかもゲーム内で変えた値なのに、ゲームからEscapeした後も値が保存されてるなんで
+                player.transform.localScale = (player.transform.localScale.x - 0.1f) * Vector3.one;//なぜかシーンから抜けたり、シーンを再ロードしたりすると、これが適用される。しかもゲーム内で変えた値なのに、ゲームからEscapeした後も値が保存されてるなんで
+                audioSource.PlayOneShot(playerSizeBig);
                 currentState++;
                 Debug.Log("big3");
                 break;

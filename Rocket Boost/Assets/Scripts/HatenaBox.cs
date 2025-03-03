@@ -20,6 +20,8 @@ public class HatenaBox : MonoBehaviour
     Renderer mainBoxRenderer;
     Vector3 startPos;
     Vector3 endPos;
+    [SerializeField] AudioClip hatenaBoxPush;
+    AudioSource audioSource;
     [SerializeField] float movementY = 1f;
     void Start()
     {
@@ -29,6 +31,7 @@ public class HatenaBox : MonoBehaviour
         endPos = startPos + Vector3.up * movementY;
 
         mainBoxRenderer = mainBox.GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -72,6 +75,7 @@ public class HatenaBox : MonoBehaviour
         if (other.gameObject.tag == "Player" && currentState == HatenaBoxState.unpressed)
         {
             currentState = HatenaBoxState.movingUp;
+            audioSource.PlayOneShot(hatenaBoxPush);
         }
     }
 }
