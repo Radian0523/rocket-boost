@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Friendly
   - Fuel
+  - TrackingObject
+  - Actors
+  - DeviceTypeManager
   layers:
   - Default
   - TransparentFX

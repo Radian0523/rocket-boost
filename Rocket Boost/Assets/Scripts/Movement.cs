@@ -16,8 +16,14 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem mainBooster;
     [SerializeField] ParticleSystem rightBooster;
     [SerializeField] ParticleSystem leftBooster;
+    GameObject deviceTypeManager;
+    DeviceTypeManager deviceTypeMng;
 
+    public bool isMobile;
 
+    public float rotationValue;
+
+    public bool doThrust = false;
     Rigidbody rb;
     AudioSource audioSource;
 
@@ -25,7 +31,7 @@ public class Movement : MonoBehaviour
     {
         if (isEnabled == true)
         {
-            thrust.Enable();
+            thrust.Enable();//(InputAction型の実体).enabled == false の時、そのInputActionの動作は、ボタンが押されているかどうかによらずオフになる。
             rotation.Enable();
         }
         else
@@ -40,10 +46,21 @@ public class Movement : MonoBehaviour
         SetMovementEnabled(true);
     }
 
+    void Awake()
+    {
+        deviceTypeManager = GameObject.FindWithTag("DeviceTypeManager");
+        deviceTypeMng = deviceTypeManager.GetComponent<DeviceTypeManager>();
+        isMobile = deviceTypeMng.GetIsMoblie();
+        // isPhone = (SystemInfo.deviceType == DeviceType.Handheld);
+        // isMobile = true;
+        // isPhone = false;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+
     }
 
 
@@ -59,17 +76,35 @@ public class Movement : MonoBehaviour
 
     private void ProcessThrust()
     {
-        if (thrust.IsPressed())
+        if (!isMobile)
         {
-            StartThrusting();
+            if (thrust.IsPressed())
+            {
+                StartThrusting();
+            }
+            else if (thrust.enabled && rotation.enabled)
+            {
+                StopThrusting();
+            }
         }
-        else if (thrust.enabled && rotation.enabled)
+        else
         {
-            StopThrusting();
+            if (thrust.enabled)
+            {
+                if (doThrust)
+                {
+                    StartThrusting();
+                }
+                else if (thrust.enabled && rotation.enabled)
+                {
+                    StopThrusting();
+                }
+            }
+
         }
 
     }
-    private void StartThrusting()
+    void StartThrusting()
     {
         //これを入れることで、何度もAudioが再生されて汚い音になることを防ぐ。フラグでもできるが、これのほうが複雑化しにくい。
         if (!audioSource.isPlaying)
@@ -82,7 +117,7 @@ public class Movement : MonoBehaviour
         }
         rb.AddRelativeForce(Vector3.up * thrustSpeed * Time.fixedDeltaTime);
     }
-    private void StopThrusting()
+    void StopThrusting()
     {
         audioSource.Stop();
         mainBooster.Stop();
@@ -92,33 +127,42 @@ public class Movement : MonoBehaviour
 
     private void ProcessRotation()
     {
-        //何もしてなければ０、positiveで１、negativeで-１を返す
-        float rotationInput = rotation.ReadValue<float>();
-        if (rotationInput == 1)
+        if (rotation.enabled)
         {
-            if (!leftBooster.isPlaying)
+            if (!isMobile)
             {
-                leftBooster.Play();
+                //何もしてなければ０、positiveで１、negativeで-１を返す
+                float rotationInput = rotation.ReadValue<float>();
+                rotationValue = rotationInput;
             }
-        }
-        else if (rotationInput == -1)
-        {
-            if (!rightBooster.isPlaying)
-            {
-                rightBooster.Play();
-            }
-        }
-        else
-        {
-            rightBooster.Stop();
-            leftBooster.Stop();
-        }
-        //手動で回転させているときは、物理システムによる回転を無視させる(変な挙動がなくなり、操作がしやすくなる)
-        // rb.freezeRotation = (rotationInput != 0) ? true : false;
-        // rb.freezeRotation = true;
-        transform.Rotate(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed);
 
-        //rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed));
+            if (rotationValue == 1)
+            {
+                if (!leftBooster.isPlaying)
+                {
+                    leftBooster.Play();
+                }
+            }
+            else if (rotationValue == -1)
+            {
+                if (!rightBooster.isPlaying)
+                {
+                    rightBooster.Play();
+                }
+            }
+            else
+            {
+                rightBooster.Stop();
+                leftBooster.Stop();
+            }
+            //手動で回転させているときは、物理システムによる回転を無視させる(変な挙動がなくなり、操作がしやすくなる)
+            // rb.freezeRotation = (rotationValue != 0) ? true : false;
+            // rb.freezeRotation = true;
+            transform.Rotate(Vector3.forward * (-rotationValue) * Time.fixedDeltaTime * rotationSpeed);
+
+            //rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.forward * (-rotationInput) * Time.fixedDeltaTime * rotationSpeed));
+
+        }
 
     }
 }

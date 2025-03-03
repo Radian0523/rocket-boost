@@ -83,7 +83,7 @@ public class CollisionHandler : MonoBehaviour
         //永遠とステージを回る感じになっている。
         if (currentSceneIndex + 1 == sceneNum)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);// 0 はタイトルシーン
         }
         else
         {
