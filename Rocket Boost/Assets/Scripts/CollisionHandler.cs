@@ -69,7 +69,7 @@ public class CollisionHandler : MonoBehaviour
     {
         audioSource.Stop();
         GetComponent<Movement>().SetMovementEnabled(false);
-        audioSource.PlayOneShot(deathExplosionSFX);
+        audioSource.PlayOneShot(deathExplosionSFX, 0.3f);
         crashParticles.Play();
         isControllable = false;
         //第一引数の関数を、第二引数秒分待ってから、呼び出す
